@@ -6,7 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = flask.Flask(__name__, template_folder='templates')
 
-df2 = pd.read_csv('./model/tmdb.csv')
+#read data
+df2 = pd.read_csv('./model/anime.csv')
 
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(df2['soup'])
@@ -26,11 +27,13 @@ def get_recommendations(title):
     movie_indices = [i[0] for i in sim_scores]
     tit = df2['title'].iloc[movie_indices]
     dat = df2['release_date'].iloc[movie_indices]
-    return_df = pd.DataFrame(columns=['Title','Year'])
+    return_df = pd.DataFrame(columns=['Title','Year']) #name columns
     return_df['Title'] = tit
     return_df['Year'] = dat
     return return_df
 
+# res = get_recommendations('Gintama')
+# print(res)
 # Set up the main route
 @app.route('/', methods=['GET', 'POST'])
 
