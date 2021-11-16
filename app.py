@@ -26,13 +26,13 @@ def get_recommendations(title):
     sim_scores = sim_scores[1:11]
     movie_indices = [i[0] for i in sim_scores]
     tit = df2['title'].iloc[movie_indices]
-    dat = df2['release_date'].iloc[movie_indices]
+    dat = df2['aired'].iloc[movie_indices]
     return_df = pd.DataFrame(columns=['Title','Year']) #name columns
     return_df['Title'] = tit
     return_df['Year'] = dat
     return return_df
 
-# res = get_recommendations('Gintama')
+# res = get_recommendations('Ancien to Mahou no Tablet: Mou Hitotsu no Hirune Hime')
 # print(res)
 # Set up the main route
 @app.route('/', methods=['GET', 'POST'])
@@ -58,4 +58,4 @@ def main():
             return flask.render_template('positive.html',movie_names=names,movie_date=dates,search_name=m_name)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=80)
