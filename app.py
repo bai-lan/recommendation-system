@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 app = flask.Flask(__name__, template_folder='templates')
 
 #read data
-df2 = pd.read_csv('./model/anime.csv')
+df2 = pd.read_csv('./model/anime_clean.csv')
 
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(df2['soup'])
